@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>تعلم الإسبانية من الصفر 🇪🇸</title>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--cr:#1A0800;--cr2:#2A1200;--cr3:#3D1E00;--gold:#F5A623;--gold2:#FFD166;--terra:#E05C4B;--terra2:#FF8674;--azure:#3A9DD4;--azure2:#6BBFE8;--mint:#2DCE89;--cream:#FFF0DC;--txt:#FFF0DC;--muted:rgba(255,240,220,.55);--border:rgba(245,166,35,.12);--card:rgba(255,240,220,.05);--card2:rgba(255,240,220,.08)}
+body.light{--cr:#FFF5EC;--cr2:#FFE8CC;--txt:#2C1000;--muted:rgba(44,16,0,.55);--border:rgba(180,80,0,.12);--card:rgba(255,200,140,.12);--card2:rgba(255,200,140,.2)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--txt);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s}
+#pbar{position:fixed;top:0;right:0;height:3px;z-index:9999;width:0;background:linear-gradient(90deg,var(--terra),var(--gold),var(--azure));transition:width .1s}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 20px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(224,92,75,.18) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(58,157,212,.15) 0%,transparent 60%),radial-gradient(ellipse at 50% 80%,rgba(245,166,35,.1) 0%,transparent 50%);pointer-events:none}
+.hero-flag{font-size:clamp(4rem,12vw,8rem);margin-bottom:20px;display:block;filter:drop-shadow(0 20px 60px rgba(245,166,35,.3))}
+.hero-eyebrow{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1.05;margin-bottom:20px}
+.hero-title .sp{color:var(--gold)}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.2rem);color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:36px;font-family:'Cairo',sans-serif}
+.hero-badges{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.badge{padding:8px 18px;border-radius:30px;font-size:.85rem;font-weight:600;border:1px solid}
+.badge.terra{background:rgba(224,92,75,.15);border-color:rgba(224,92,75,.4);color:var(--terra2)}
+.badge.gold{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.35);color:var(--gold2)}
+.badge.azure{background:rgba(58,157,212,.12);border-color:rgba(58,157,212,.35);color:var(--azure2)}
+.scroll-cta{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:'Cairo',sans-serif}
+.scroll-arrow{width:24px;height:24px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(7px)}}
+
+/* STATS */
+.stats{position:relative;z-index:1;display:flex;justify-content:center;gap:0;background:var(--card2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-item{flex:1;max-width:200px;text-align:center;padding:20px 10px;border-left:1px solid var(--border)}
+.stat-item:last-child{border-right:1px solid var(--border)}
+.sn{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.sl{font-size:.8rem;color:var(--muted);margin-top:4px;font-family:'Cairo',sans-serif}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(26,8,0,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+body.light .nav{background:rgba(255,245,236,.92)}
+.nav-inner{display:flex;align-items:center;padding:0 20px;max-width:1200px;margin:0 auto;overflow-x:auto;scrollbar-width:none;gap:2px}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:14px 14px;background:none;border:none;color:var(--muted);font-family:'Cairo',sans-serif;font-size:.85rem;cursor:pointer;white-space:nowrap;transition:color .25s;border-bottom:3px solid transparent}
+.nav-btn:hover{color:var(--txt)}
+.nav-btn.act{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);font-weight:700;margin-right:auto;flex-shrink:0;padding:14px 0}
+
+/* MAIN */
+main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 16px 100px}
+.sec-hdr{margin-bottom:28px}
+.sec-eye{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;line-height:1.2}
+.sec-title .hl{color:var(--terra)}
+.sec-sub{color:var(--muted);font-size:.92rem;margin-top:8px;line-height:1.7;font-family:'Cairo',sans-serif}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:border-color .3s,transform .25s,box-shadow .3s}
+.card:hover{border-color:rgba(245,166,35,.3);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+
+/* PRON */
+.pron-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.pron-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.pron-letter{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--gold);line-height:1}
+.pron-sound{font-size:.85rem;color:var(--terra2);font-weight:600}
+.pron-ex{font-size:.88rem;color:var(--muted);font-family:'Cairo',sans-serif;line-height:1.5}
+.pron-note{font-size:.78rem;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:6px 10px;color:var(--gold2);line-height:1.5;font-family:'Cairo',sans-serif}
+.spk-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:4px 12px;border-radius:20px;font-size:.78rem;cursor:pointer;transition:all .2s;font-family:'Cairo',sans-serif;align-self:flex-start}
+.spk-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(245,166,35,.08)}
+.spk-btn.speaking{border-color:var(--terra);color:var(--terra);animation:pulse .8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* PHRASES */
+.ph-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:flex-start;gap:14px;transition:border-color .3s}
+.ph-card:hover{border-color:rgba(58,157,212,.3)}
+.ph-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.ph-es{font-size:1.05rem;font-weight:600;margin-bottom:4px;font-family:'Playfair Display',serif}
+.ph-ar{font-size:.88rem;color:var(--muted);font-family:'Cairo',sans-serif;margin-bottom:2px}
+.ph-en{font-size:.75rem;color:rgba(255,240,220,.3);font-style:italic}
+body.light .ph-en{color:rgba(44,16,0,.3)}
+.ph-btn{margin-top:8px;background:none;border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:16px;font-size:.75rem;cursor:pointer;transition:all .2s}
+.ph-btn:hover{border-color:var(--azure);color:var(--azure)}
+
+/* VOCAB TABS */
+.vtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.vt{padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:30px;color:var(--muted);font-family:'Cairo',sans-serif;font-size:.83rem;cursor:pointer;transition:all .25s}
+.vt:hover{border-color:rgba(245,166,35,.3);color:var(--txt)}
+.vt.act{background:rgba(245,166,35,.15);border-color:var(--gold);color:var(--gold)}
+
+/* NUMBERS */
+.nums-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px}
+.num-cell{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .25s}
+.num-cell:hover{background:rgba(245,166,35,.12);border-color:var(--gold);transform:scale(1.06)}
+.nn{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);line-height:1}
+.nw{font-size:.75rem;color:var(--txt);margin-top:4px;font-weight:500}
+.na{font-size:.7rem;color:var(--muted);margin-top:2px;font-family:'Cairo',sans-serif}
+
+/* VOCAB */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.vc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all .25s}
+.vc:hover{border-color:rgba(58,157,212,.35);transform:scale(1.04)}
+.ve{font-size:1.8rem;margin-bottom:6px;line-height:1}
+.vs{font-weight:600;font-size:.9rem;color:var(--txt);margin-bottom:2px}
+.va{font-size:.78rem;color:var(--muted);font-family:'Cairo',sans-serif}
+.vg{font-size:.72rem;color:var(--terra2);margin-top:2px;font-style:italic}
+
+/* GRAMMAR */
+.gb{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px}
+.gb-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.gb-sub{font-size:.88rem;color:var(--muted);margin-bottom:16px;font-family:'Cairo',sans-serif;line-height:1.6}
+.rr{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
+.rr:last-child{border-bottom:none}
+.rr-es{font-weight:700;color:var(--gold);min-width:130px;font-size:.95rem;flex-shrink:0}
+.rr-ar{font-family:'Cairo',sans-serif;color:var(--muted);font-size:.88rem;line-height:1.5}
+.rr-note{font-size:.75rem;color:var(--terra2);background:rgba(224,92,75,.1);border-radius:6px;padding:3px 8px;margin-right:auto;font-family:'Cairo',sans-serif;flex-shrink:0}
+.conj-tbl{width:100%;border-collapse:collapse;margin-top:12px}
+.conj-tbl th{background:rgba(245,166,35,.1);color:var(--gold);font-size:.8rem;padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid var(--border)}
+.conj-tbl td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:.88rem}
+.conj-tbl tr:last-child td{border-bottom:none}
+.conj-tbl td:first-child{color:var(--muted);font-family:'Cairo',sans-serif;font-size:.83rem}
+.conj-tbl td:nth-child(2){font-weight:700;color:var(--terra2);cursor:pointer}
+.conj-tbl td:nth-child(3){color:var(--muted);font-family:'Cairo',sans-serif;font-size:.83rem}
+
+/* DIALOGUES */
+.dlg{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:14px}
+.dlg-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:14px;color:var(--gold);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.msg{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.msg.b{flex-direction:row-reverse}
+.mavatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.msg.a .mavatar{background:rgba(58,157,212,.2)}.msg.b .mavatar{background:rgba(224,92,75,.2)}
+.bubble{background:var(--card2);border-radius:12px;padding:10px 14px;max-width:80%}
+.msg.b .bubble{background:rgba(224,92,75,.1);border:1px solid rgba(224,92,75,.15)}
+.bes{font-size:.95rem;font-weight:600;margin-bottom:2px}
+.bar{font-size:.8rem;color:var(--muted);font-family:'Cairo',sans-serif}
+.ben{font-size:.73rem;color:rgba(255,240,220,.3);font-style:italic}
+body.light .ben{color:rgba(44,16,0,.3)}
+
+/* AI */
+.ai-card{background:linear-gradient(135deg,rgba(58,157,212,.12),rgba(45,206,137,.08));border:1px solid rgba(58,157,212,.25);border-radius:16px;padding:24px;margin-bottom:16px}
+.ai-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ai-card p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:14px;font-family:'Cairo',sans-serif}
+.prompt-box{background:rgba(0,0,0,.25);border:1px solid rgba(58,157,212,.2);border-radius:10px;padding:14px;font-size:.82rem;line-height:1.7;direction:ltr;text-align:left;color:var(--txt);font-family:'DM Sans',sans-serif;position:relative;white-space:pre-wrap}
+body.light .prompt-box{background:rgba(0,0,0,.05)}
+.copy-btn{display:block;margin-bottom:10px;background:rgba(58,157,212,.15);border:1px solid rgba(58,157,212,.3);color:var(--azure2);padding:5px 14px;border-radius:16px;font-size:.78rem;cursor:pointer;transition:all .2s;font-family:'Cairo',sans-serif}
+.copy-btn:hover{background:rgba(58,157,212,.3)}
+.copy-btn.copied{background:rgba(45,206,137,.2);border-color:rgba(45,206,137,.4);color:var(--mint)}
+.lvl-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700}
+.la1{background:rgba(45,206,137,.15);color:var(--mint);border:1px solid rgba(45,206,137,.3)}
+.la2{background:rgba(58,157,212,.15);color:var(--azure2);border:1px solid rgba(58,157,212,.3)}
+.lb1{background:rgba(245,166,35,.15);color:var(--gold2);border:1px solid rgba(245,166,35,.3)}
+
+/* QUIZ */
+.quiz-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px}
+.qprog{height:4px;background:var(--border);border-radius:4px;margin-bottom:24px;overflow:hidden}
+.qfill{height:100%;background:linear-gradient(90deg,var(--terra),var(--gold));border-radius:4px;transition:width .5s ease}
+.quiz-q{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:8px;line-height:1.3}
+.quiz-sub{font-family:'Cairo',sans-serif;font-size:.92rem;color:var(--muted);margin-bottom:24px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:500px){.quiz-opts{grid-template-columns:1fr}}
+.qopt{background:var(--card2);border:2px solid var(--border);border-radius:12px;padding:14px 18px;cursor:pointer;transition:all .25s;font-size:.92rem;text-align:right;font-weight:500;font-family:'Cairo',sans-serif;width:100%}
+.qopt:hover:not(:disabled){border-color:var(--gold);background:rgba(245,166,35,.1)}
+.qopt.correct{border-color:var(--mint);background:rgba(45,206,137,.12);color:var(--mint)}
+.qopt.wrong{border-color:var(--terra);background:rgba(224,92,75,.12);color:var(--terra2)}
+.qopt:disabled{cursor:default}
+.qfb{min-height:44px;font-family:'Cairo',sans-serif;font-size:.92rem;line-height:1.6;padding:10px 14px;border-radius:10px;margin-bottom:16px}
+.qfb.ok{background:rgba(45,206,137,.1);border:1px solid rgba(45,206,137,.3);color:var(--mint)}
+.qfb.no{background:rgba(224,92,75,.1);border:1px solid rgba(224,92,75,.3);color:var(--terra2)}
+.qnext{background:linear-gradient(135deg,var(--terra),var(--gold));border:none;color:#fff;padding:12px 32px;border-radius:30px;font-family:'Cairo',sans-serif;font-size:.95rem;cursor:pointer;font-weight:700;transition:transform .2s,box-shadow .2s}
+.qnext:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(224,92,75,.4)}
+.qscore{text-align:center;padding:20px 0}
+.qbig{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold)}
+.qmsg{font-family:'Cairo',sans-serif;font-size:1.1rem;color:var(--muted);margin-top:8px}
+.qrestart{display:inline-block;margin-top:16px;background:var(--card2);border:1px solid var(--border);color:var(--txt);padding:10px 28px;border-radius:30px;font-family:'Cairo',sans-serif;cursor:pointer;transition:all .2s}
+.qrestart:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ROADMAP */
+.roadmap{display:flex;flex-direction:column;gap:0}
+.rm-step{display:flex;gap:20px;align-items:flex-start;position:relative;padding-bottom:28px}
+.rm-step:last-child{padding-bottom:0}
+.rm-step::before{content:'';position:absolute;right:19px;top:44px;bottom:0;width:2px;background:var(--border)}
+.rm-step:last-child::before{display:none}
+.rm-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:2px solid var(--border);background:var(--card)}
+.rm-dot.active{border-color:var(--gold);background:rgba(245,166,35,.15)}
+.rm-content{flex:1;padding-top:8px}
+.rm-title{font-weight:700;font-size:1rem;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rm-desc{font-size:.85rem;color:var(--muted);line-height:1.6;font-family:'Cairo',sans-serif}
+.rm-time{font-size:.75rem;color:var(--terra2);margin-top:4px;font-weight:600}
+
+/* TIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.tip-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
+.tip-icon{font-size:2rem;margin-bottom:12px}
+.tip-title{font-weight:700;font-size:.95rem;margin-bottom:6px;color:var(--gold)}
+.tip-body{font-size:.85rem;color:var(--muted);line-height:1.7;font-family:'Cairo',sans-serif}
+
+/* MISC */
+.thm-btn{position:fixed;bottom:28px;left:28px;z-index:999;width:50px;height:50px;border-radius:50%;border:1px solid var(--border);background:var(--card2);color:var(--txt);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:transform .3s}
+.thm-btn:hover{transform:scale(1.1) rotate(20deg)}
+[x-cloak]{display:none!important}
+footer{position:relative;z-index:1;text-align:center;padding:28px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);font-family:'Cairo',sans-serif}
+.info-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:20px;font-family:'Cairo',sans-serif}
+.alert-box{background:rgba(224,92,75,.1);border:1px solid rgba(224,92,75,.25);border-radius:14px;padding:18px;margin-bottom:20px;font-family:'Cairo',sans-serif}
+@media(max-width:600px){.hero{min-height:90vh;padding:40px 16px}.stats{flex-wrap:wrap}.stat-item{min-width:50%}}
+</style>
+</head>
+<body x-data="app()" :class="lm?'light':''" @scroll.window="onScroll()">
+<div id="pbar"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-flag" id="hflag">🇪🇸</div>
+  <div class="hero-eyebrow" id="heyebrow">Aprende Español — تعلّم الإسبانية</div>
+  <h1 class="hero-title" id="htitle">تعلّم <span class="sp">الإسبانية</span><br/>من الصفر</h1>
+  <p class="hero-sub" id="hsub">مصمّم خصيصاً لمن يتحدث العربية والإنجليزية — من النطق حتى المحادثة مع دليل كامل لاستخدام الذكاء الاصطناعي</p>
+  <div class="hero-badges" id="hbadges">
+    <span class="badge terra">🎯 من الصفر كلياً</span>
+    <span class="badge gold">🇸🇦 للناطقين بالعربية</span>
+    <span class="badge azure">🤖 تدريب بالـ AI</span>
+  </div>
+  <div class="scroll-cta" id="hscroll">
+    <span>ابدأ رحلتك</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats" id="stats">
+  <div class="stat-item"><div class="sn" data-to="9">0</div><div class="sl">أقسام تعليمية</div></div>
+  <div class="stat-item"><div class="sn" data-to="200">0</div><div class="sl">كلمة وعبارة</div></div>
+  <div class="stat-item"><div class="sn" data-to="15">0</div><div class="sl">سؤال في الاختبار</div></div>
+  <div class="stat-item"><div class="sn" data-to="10">0</div><div class="sl">بروميت للـ AI</div></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn" :class="t==='pron'?'act':''" @click="sw('pron')">🔊 النطق</button>
+    <button class="nav-btn" :class="t==='phrases'?'act':''" @click="sw('phrases')">💬 العبارات</button>
+    <button class="nav-btn" :class="t==='nums'?'act':''" @click="sw('nums')">🔢 الأرقام</button>
+    <button class="nav-btn" :class="t==='vocab'?'act':''" @click="sw('vocab')">📚 المفردات</button>
+    <button class="nav-btn" :class="t==='grammar'?'act':''" @click="sw('grammar')">📖 القواعد</button>
+    <button class="nav-btn" :class="t==='dialogues'?'act':''" @click="sw('dialogues')">🗣️ محادثات</button>
+    <button class="nav-btn" :class="t==='ai'?'act':''" @click="sw('ai')">🤖 تعلّم مع AI</button>
+    <button class="nav-btn" :class="t==='quiz'?'act':''" @click="sw('quiz')">🏆 اختبار</button>
+    <button class="nav-btn" :class="t==='roadmap'?'act':''" @click="sw('roadmap')">🗺️ خارطة الطريق</button>
+    <div class="nav-logo">¡Hola! 🇪🇸</div>
+  </div>
+</nav>
+
+<main>
+
+<!-- PRONUNCIATION -->
+<div x-show="t==='pron'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Pronunciación — النطق</div>
+    <h2 class="sec-title">الحروف و<span class="hl">النطق</span></h2>
+    <p class="sec-sub">الإسبانية تُنطق كما تُكتب تقريباً! اضغط 🔊 لسماع الحرف</p>
+  </div>
+  <div class="alert-box">
+    <div style="font-weight:700;color:var(--terra2);margin-bottom:8px">⚡ أصوات تختلف عن العربية والإنجليزية:</div>
+    <div style="font-size:.88rem;color:var(--muted);line-height:1.9">
+      <strong style="color:var(--txt)">ñ</strong> — مثل "نيا" المشددة — mañana (غداً) &nbsp;|&nbsp;
+      <strong style="color:var(--txt)">h</strong> — صامتة دائماً! hola تُنطق "أولا" &nbsp;|&nbsp;
+      <strong style="color:var(--txt)">j</strong> — مثل الخاء العربية "خ" &nbsp;|&nbsp;
+      <strong style="color:var(--txt)">rr</strong> — راء مرددة قوية &nbsp;|&nbsp;
+      <strong style="color:var(--txt)">v</strong> — تُنطق مثل الباء "b" تماماً!
+    </div>
+  </div>
+  <div class="pron-grid">
+    <template x-for="p in prons" :key="p.l">
+      <div class="pron-card">
+        <div class="pron-letter" x-text="p.l"></div>
+        <div class="pron-sound" x-text="p.sound"></div>
+        <div class="pron-ex" x-text="p.ex"></div>
+        <template x-if="p.note"><div class="pron-note" x-text="p.note"></div></template>
+        <button class="spk-btn" :id="'s'+p.l.replace(/\s/,'')" @click="speak(p.word,'s'+p.l.replace(/\s/,''))">🔊 استمع</button>
+      </div>
+    </template>
+  </div>
+  <div class="info-box" style="margin-top:20px">
+    <strong style="color:var(--gold)">🎵 علامات التشكيل (Tildes):</strong>
+    <div style="font-size:.88rem;color:var(--muted);line-height:1.9;margin-top:8px">
+      <strong style="color:var(--txt)">á é í ó ú</strong> — تشديد على المقطع أو تفريق بين كلمتين متشابهتين &nbsp;|&nbsp;
+      <strong style="color:var(--txt)">¿ ¡</strong> — علامات تأتي في البداية — خاصة بالإسبانية!
+    </div>
+  </div>
+</div>
+
+<!-- PHRASES -->
+<div x-show="t==='phrases'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Frases Esenciales — عبارات أساسية</div>
+    <h2 class="sec-title">أهم <span class="hl">العبارات</span></h2>
+    <p class="sec-sub">عبارات تستخدمها كل يوم — اضغط 🔊 لسماع النطق</p>
+  </div>
+  <div x-data="{cat:'greet'}">
+    <div class="vtabs">
+      <template x-for="c in phCats" :key="c.id">
+        <button class="vt" :class="cat===c.id?'act':''" @click="cat=c.id" x-text="c.l"></button>
+      </template>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <template x-for="ph in phrases.filter(p=>p.cat===cat)" :key="ph.es">
+        <div class="ph-card">
+          <div class="ph-icon" :style="'background:'+ph.bg" x-text="ph.icon"></div>
+          <div style="flex:1">
+            <div class="ph-es" x-text="ph.es"></div>
+            <div class="ph-ar" x-text="ph.ar"></div>
+            <div class="ph-en" x-text="ph.en"></div>
+            <button class="ph-btn" @click="speak(ph.es)">🔊 استمع</button>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div x-show="t==='nums'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Números — الأرقام</div>
+    <h2 class="sec-title">الأرقام من <span class="hl">0 حتى 1000</span></h2>
+    <p class="sec-sub">اضغط على أي رقم لسماع نطقه</p>
+  </div>
+  <div class="nums-grid">
+    <template x-for="n in numbers" :key="n.n">
+      <div class="num-cell" @click="speak(n.es)">
+        <div class="nn" x-text="n.n"></div>
+        <div class="nw" x-text="n.es"></div>
+        <div class="na" x-text="n.ar"></div>
+      </div>
+    </template>
+  </div>
+  <div class="info-box" style="margin-top:20px">
+    <strong style="color:var(--gold)">📝 ملاحظات مهمة:</strong>
+    <div style="font-size:.88rem;color:var(--muted);line-height:1.9;margin-top:8px">
+      • <strong>16-19</strong>: كلمة واحدة — dieciséis, diecisiete, dieciocho, diecinueve<br/>
+      • <strong>21-29</strong>: كلمة واحدة — veintiuno, veintidós, veintitrés...<br/>
+      • <strong>31+</strong>: ثلاث كلمات — treinta y uno (30 + y + 1)<br/>
+      • <strong>uno/una</strong>: يتغير حسب الجنس — un libro / una casa
+    </div>
+  </div>
+</div>
+
+<!-- VOCAB -->
+<div x-show="t==='vocab'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Vocabulario — المفردات</div>
+    <h2 class="sec-title">المفردات <span class="hl">الأساسية</span></h2>
+    <p class="sec-sub">مقسّمة بالموضوع — اضغط على أي كلمة لسماعها</p>
+  </div>
+  <div class="vtabs">
+    <template x-for="c in vcCats" :key="c.id">
+      <button class="vt" :class="vc===c.id?'act':''" @click="vc=c.id" x-text="c.l"></button>
+    </template>
+  </div>
+  <div class="vocab-grid">
+    <template x-for="w in vocab.filter(v=>v.cat===vc)" :key="w.es">
+      <div class="vc" @click="speak(w.es)">
+        <div class="ve" x-text="w.e"></div>
+        <div class="vs" x-text="w.es"></div>
+        <div class="va" x-text="w.ar"></div>
+        <div class="vg" x-text="w.gen||''"></div>
+      </div>
+    </template>
+  </div>
+</div>
+
+<!-- GRAMMAR -->
+<div x-show="t==='grammar'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Gramática — القواعد</div>
+    <h2 class="sec-title">أساسيات <span class="hl">القواعد</span></h2>
+    <p class="sec-sub">لا تقلق — فقط القواعد الأكثر استخداماً</p>
+  </div>
+  <!-- Gender -->
+  <div class="gb">
+    <div class="gb-title">⚧️ جنس الكلمات — El Género</div>
+    <div class="gb-sub">في الإسبانية كل اسم له جنس: مذكر أو مؤنث. يؤثر على المقالة والصفات</div>
+    <div class="rr"><div class="rr-es">el → los</div><div class="rr-ar">للمذكر: el libro (الكتاب) — los libros (الكتب)</div></div>
+    <div class="rr"><div class="rr-es">la → las</div><div class="rr-ar">للمؤنث: la casa (المنزل) — las casas (المنازل)</div></div>
+    <div class="rr"><div class="rr-es">-o غالباً</div><div class="rr-ar">مذكر: libro, niño, perro</div><span class="rr-note">قاعدة عامة</span></div>
+    <div class="rr"><div class="rr-es">-a غالباً</div><div class="rr-ar">مؤنث: casa, niña, mesa</div><span class="rr-note">قاعدة عامة</span></div>
+    <div class="rr"><div class="rr-es">-ción / -dad</div><div class="rr-ar">دائماً مؤنث: nación, ciudad, libertad</div></div>
+  </div>
+  <!-- Ser vs Estar -->
+  <div class="gb">
+    <div class="gb-title">🆚 أصعب درس — Ser vs Estar</div>
+    <div class="gb-sub">فعلان يعنيان "يكون" — الفرق في الثبات أو التغيير</div>
+    <div class="rr"><div class="rr-es" style="color:var(--terra2)">SER</div><div class="rr-ar">للصفات الثابتة: هويتك، جنسيتك، مهنتك، شكلك الدائم</div></div>
+    <div class="rr"><div class="rr-es" style="color:var(--terra2)">Soy Ahmed</div><div class="rr-ar">أنا أحمد (هوية ثابتة)</div></div>
+    <div class="rr"><div class="rr-es" style="color:var(--terra2)">Soy árabe</div><div class="rr-ar">أنا عربي (جنسية)</div></div>
+    <div class="rr"><div class="rr-es" style="color:var(--azure2)">ESTAR</div><div class="rr-ar">للحالات المؤقتة: شعورك الآن، مكانك، حالتك الصحية</div></div>
+    <div class="rr"><div class="rr-es" style="color:var(--azure2)">Estoy bien</div><div class="rr-ar">أنا بخير (الآن — ليس دائماً)</div></div>
+    <div class="rr"><div class="rr-es" style="color:var(--azure2)">Estoy en casa</div><div class="rr-ar">أنا في البيت (الآن — مؤقت)</div></div>
+  </div>
+  <!-- Conjugation -->
+  <div class="gb">
+    <div class="gb-title">📊 تصريف الأفعال الأساسية</div>
+    <div class="gb-sub">احفظ هذه الأفعال الخمسة وستتكلم! اضغط على التصريف لسماعه</div>
+    <div x-data="{cv:'ser'}">
+      <div class="vtabs">
+        <button class="vt" :class="cv==='ser'?'act':''" @click="cv='ser'">SER</button>
+        <button class="vt" :class="cv==='estar'?'act':''" @click="cv='estar'">ESTAR</button>
+        <button class="vt" :class="cv==='tener'?'act':''" @click="cv='tener'">TENER</button>
+        <button class="vt" :class="cv==='ir'?'act':''" @click="cv='ir'">IR</button>
+        <button class="vt" :class="cv==='querer'?'act':''" @click="cv='querer'">QUERER</button>
+      </div>
+      <table class="conj-tbl">
+        <tr><th>الضمير</th><th>التصريف (اضغط للسماع)</th><th>المعنى</th></tr>
+        <template x-for="r in conj[cv]" :key="r[0]">
+          <tr><td x-text="r[0]"></td><td x-text="r[1]" @click="speak(r[1])"></td><td x-text="r[2]"></td></tr>
+        </template>
+      </table>
+    </div>
+  </div>
+  <!-- Questions -->
+  <div class="gb">
+    <div class="gb-title">❓ أدوات الاستفهام</div>
+    <div class="gb-sub">كلمات السؤال — كلها تحمل تشديداً (accent mark). اضغط للسماع</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:4px">
+      <template x-for="q in questions" :key="q.es">
+        <div style="background:var(--card2);border-radius:10px;padding:12px;cursor:pointer;border:1px solid var(--border)" @click="speak(q.es)">
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--gold)" x-text="q.es"></div>
+          <div style="font-size:.85rem;font-family:'Cairo',sans-serif;color:var(--muted);margin-top:4px" x-text="q.ar"></div>
+          <div style="font-size:.75rem;color:var(--terra2);margin-top:2px;font-style:italic" x-text="q.ex"></div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+
+<!-- DIALOGUES -->
+<div x-show="t==='dialogues'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Diálogos — محادثات</div>
+    <h2 class="sec-title">محادثات <span class="hl">حقيقية</span></h2>
+    <p class="sec-sub">مواقف يومية — اضغط 🔊 لسماع كل جملة</p>
+  </div>
+  <template x-for="d in dialogues" :key="d.title">
+    <div class="dlg">
+      <div class="dlg-title">
+        <span x-text="d.icon"></span>
+        <span x-text="d.title"></span>
+        <span style="margin-right:auto;font-size:.78rem;color:var(--muted);font-family:'Cairo',sans-serif" x-text="d.ctx"></span>
+      </div>
+      <template x-for="m in d.msgs" :key="m.es">
+        <div class="msg" :class="m.side==='B'?'b':'a'">
+          <div class="mavatar" x-text="m.side==='B'?'🧑':'👩'"></div>
+          <div class="bubble">
+            <div class="bes" x-text="m.es"></div>
+            <div class="bar" x-text="m.ar"></div>
+            <div class="ben" x-text="m.en"></div>
+          </div>
+          <button style="background:none;border:none;cursor:pointer;font-size:1rem;opacity:.5;align-self:center;flex-shrink:0" @click="speak(m.es)">🔊</button>
+        </div>
+      </template>
+    </div>
+  </template>
+</div>
+
+<!-- AI -->
+<div x-show="t==='ai'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">IA — ذكاء اصطناعي</div>
+    <h2 class="sec-title">تعلّم مع <span class="hl">AI</span></h2>
+    <p class="sec-sub">الذكاء الاصطناعي هو أفضل معلم خاص — متاح 24/7. انسخ أي بروميت واستخدمه في Claude أو ChatGPT</p>
+  </div>
+  <div class="info-box" style="margin-bottom:24px">
+    <strong style="color:var(--gold)">🎯 استراتيجية التعلم مع AI:</strong>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px;font-family:'Cairo',sans-serif;font-size:.88rem;color:var(--muted)">
+      <div style="background:var(--card2);border-radius:10px;padding:12px"><strong style="color:var(--gold)">1. التصحيح الفوري</strong><br/>اكتب جملة والـ AI يصحح ويشرح</div>
+      <div style="background:var(--card2);border-radius:10px;padding:12px"><strong style="color:var(--gold)">2. محادثة حرة</strong><br/>تحدث معه بالإسبانية كأنك في إسبانيا!</div>
+      <div style="background:var(--card2);border-radius:10px;padding:12px"><strong style="color:var(--gold)">3. شرح القواعد</strong><br/>اسأله عن أي قاعدة بالعربية</div>
+      <div style="background:var(--card2);border-radius:10px;padding:12px"><strong style="color:var(--gold)">4. توليد تمارين</strong><br/>يصمم تمارين على حسب مستواك</div>
+    </div>
+  </div>
+  <template x-for="p in aiPrompts" :key="p.title">
+    <div class="ai-card">
+      <h3>
+        <span x-text="p.icon"></span>
+        <span x-text="p.title"></span>
+        <span class="lvl-badge" :class="'l'+p.lvl" x-text="p.lvl.toUpperCase()"></span>
+      </h3>
+      <p x-text="p.desc"></p>
+      <button class="copy-btn" :id="'cp'+p.title" @click="copyP(p.prompt,'cp'+p.title)">📋 نسخ البروميت</button>
+      <div class="prompt-box" x-text="p.prompt"></div>
+    </div>
+  </template>
+  <div style="background:linear-gradient(135deg,rgba(45,206,137,.1),rgba(58,157,212,.08));border:1px solid rgba(45,206,137,.2);border-radius:16px;padding:22px;margin-top:8px">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:14px;color:var(--mint)">🛠️ أفضل الأدوات</h3>
+    <div style="display:flex;flex-direction:column;gap:10px;font-family:'Cairo',sans-serif;font-size:.9rem;color:var(--muted);line-height:1.7">
+      <div><strong style="color:var(--txt)">🤖 Claude — claude.ai</strong> — الأفضل للشرح التفصيلي وتصحيح القواعد</div>
+      <div><strong style="color:var(--txt)">💬 ChatGPT — chatgpt.com</strong> — ممتاز للمحادثة والتمرين اليومي</div>
+      <div><strong style="color:var(--txt)">🦜 Duolingo</strong> — تطبيق مجاني مصمم للتعلم خطوة بخطوة</div>
+      <div><strong style="color:var(--txt)">📱 Anki</strong> — بطاقات الحفظ — اصنع بطاقاتك بمساعدة AI</div>
+      <div><strong style="color:var(--txt)">🌍 HelloTalk / Tandem</strong> — تحدث مع ناطقين أصليين مجاناً</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div x-show="t==='quiz'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Examen — اختبار</div>
+    <h2 class="sec-title">اختبر <span class="hl">معلوماتك</span></h2>
+    <p class="sec-sub">15 سؤال من جميع الأقسام</p>
+  </div>
+  <div class="quiz-wrap">
+    <div x-show="qDone" class="qscore">
+      <div class="qbig" x-text="qScore+'/'+qs.length"></div>
+      <div class="qmsg" x-text="qScore>=12?'ممتاز! 🎉 إسبانيك رائع!':qScore>=8?'جيد جداً! 👏 استمر':qScore>=5?'جيد! 😊 راجع الدروس':'لا تيأس! 💪 راجع ثم حاول'"></div>
+      <button class="qrestart" @click="qIdx=0;qScore=0;qAnswered=false;qChosen=-1;qDone=false;qFb=''">🔄 إعادة الاختبار</button>
+    </div>
+    <div x-show="!qDone">
+      <div class="qprog"><div class="qfill" :style="'width:'+(qIdx/qs.length*100)+'%'"></div></div>
+      <div style="font-size:.83rem;color:var(--muted);font-family:'Cairo',sans-serif;margin-bottom:12px" x-text="'سؤال '+(qIdx+1)+' من '+qs.length"></div>
+      <div class="quiz-q" x-text="qs[qIdx].q"></div>
+      <div class="quiz-sub" x-text="qs[qIdx].hint||''"></div>
+      <div class="quiz-opts">
+        <template x-for="(opt,i) in qs[qIdx].opts" :key="opt">
+          <button class="qopt" :class="qAnswered?(i===qs[qIdx].correct?'correct':(qChosen===i?'wrong':'')):''" :disabled="qAnswered" @click="answer(i)" x-text="opt"></button>
+        </template>
+      </div>
+      <div class="qfb" :class="qFbOk?'ok':'no'" x-show="qAnswered" x-text="qFb"></div>
+      <button class="qnext" x-show="qAnswered" @click="nextQ()" x-text="qIdx<qs.length-1?'السؤال التالي ←':'إنهاء الاختبار'"></button>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div x-show="t==='roadmap'" x-cloak>
+  <div class="sec-hdr">
+    <div class="sec-eye">Hoja de Ruta — خارطة الطريق</div>
+    <h2 class="sec-title">من <span class="hl">A1 إلى B1</span></h2>
+    <p class="sec-sub">خطة واقعية للوصول من الصفر إلى محادثة حقيقية</p>
+  </div>
+  <div class="roadmap">
+    <template x-for="s in roadmap" :key="s.title">
+      <div class="rm-step">
+        <div class="rm-dot" :class="s.active?'active':''" x-text="s.icon"></div>
+        <div class="rm-content">
+          <div class="rm-title">
+            <span x-text="s.title"></span>
+            <span class="lvl-badge" :class="'l'+s.lvl" x-text="s.lvl.toUpperCase()"></span>
+          </div>
+          <div class="rm-desc" x-text="s.desc"></div>
+          <div class="rm-time" x-text="'⏱️ '+s.time"></div>
+        </div>
+      </div>
+    </template>
+  </div>
+  <div style="margin-top:44px">
+    <div class="sec-hdr"><div class="sec-eye">Consejos</div><h2 class="sec-title">نصائح <span class="hl">التعلم</span></h2></div>
+    <div class="tips-grid">
+      <template x-for="tip in tips" :key="tip.title">
+        <div class="tip-card">
+          <div class="tip-icon" x-text="tip.icon"></div>
+          <div class="tip-title" x-text="tip.title"></div>
+          <div class="tip-body" x-text="tip.body"></div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<button class="thm-btn" @click="lm=!lm;localStorage.setItem('t',lm?'l':'d')" :title="lm?'وضع ليلي':'وضع نهاري'">
+  <span x-text="lm?'🌙':'☀️'"></span>
+</button>
+
+<footer>
+  <p>🇪🇸 تعلّم الإسبانية من الصفر — للناطقين بالعربية والإنجليزية</p>
+  <p style="margin-top:6px">Alpine.js + GSAP + Web Speech API</p>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+function app(){return{
+  t:'pron', lm:localStorage.getItem('t')==='l', vc:'colors',
+  qIdx:0, qScore:0, qAnswered:false, qChosen:-1, qDone:false, qFb:'', qFbOk:false,
+
+  onScroll(){
+    const e=document.documentElement,s=e.scrollTop||document.body.scrollTop,tot=e.scrollHeight-e.clientHeight;
+    document.getElementById('pbar').style.width=(tot?s/tot*100:0)+'%';
+  },
+  sw(name){this.t=name;},
+
+  speak(text,btnId){
+    if(!window.speechSynthesis)return;
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);u.lang='es-ES';u.rate=0.82;
+    if(btnId){const b=document.getElementById(btnId);if(b){b.classList.add('speaking');u.onend=()=>b.classList.remove('speaking');}}
+    window.speechSynthesis.speak(u);
+  },
+
+  copyP(text,btnId){
+    navigator.clipboard.writeText(text).then(()=>{
+      const b=document.getElementById(btnId);
+      if(b){b.textContent='✅ تم النسخ';b.classList.add('copied');setTimeout(()=>{b.textContent='📋 نسخ البروميت';b.classList.remove('copied');},2500);}
+    });
+  },
+
+  answer(i){
+    if(this.qAnswered)return;
+    this.qAnswered=true;this.qChosen=i;
+    const q=this.qs[this.qIdx];
+    if(i===q.correct){this.qScore++;this.qFbOk=true;this.qFb='✅ صحيح! '+(q.exp||'');}
+    else{this.qFbOk=false;this.qFb='❌ الإجابة: '+q.opts[q.correct]+' — '+(q.exp||'');}
+  },
+  nextQ(){
+    if(this.qIdx<this.qs.length-1){this.qIdx++;this.qAnswered=false;this.qChosen=-1;this.qFb='';}
+    else{this.qDone=true;}
+  },
+
+  phCats:[{id:'greet',l:'👋 التحيات'},{id:'intro',l:'🙋 التعارف'},{id:'daily',l:'🌅 اليومي'},{id:'food',l:'🍽️ الطعام'},{id:'shop',l:'🛍️ التسوق'},{id:'transport',l:'🚌 التنقل'},{id:'emergency',l:'🆘 الطوارئ'}],
+
+  phrases:[
+    {cat:'greet',icon:'☀️',bg:'rgba(245,166,35,.15)',es:'¡Hola!',ar:'مرحباً!',en:'Hello!'},
+    {cat:'greet',icon:'🌅',bg:'rgba(224,92,75,.15)',es:'Buenos días',ar:'صباح الخير',en:'Good morning'},
+    {cat:'greet',icon:'🌆',bg:'rgba(58,157,212,.15)',es:'Buenas tardes',ar:'مساء الخير (بعد الظهر)',en:'Good afternoon'},
+    {cat:'greet',icon:'🌙',bg:'rgba(142,68,173,.15)',es:'Buenas noches',ar:'مساء الخير / تصبح على خير',en:'Good night'},
+    {cat:'greet',icon:'😊',bg:'rgba(245,166,35,.15)',es:'¿Cómo estás?',ar:'كيف حالك؟',en:'How are you?'},
+    {cat:'greet',icon:'💚',bg:'rgba(45,206,137,.15)',es:'Estoy bien, gracias',ar:'أنا بخير، شكراً',en:'I am fine, thank you'},
+    {cat:'greet',icon:'👋',bg:'rgba(224,92,75,.15)',es:'Hasta luego',ar:'إلى اللقاء',en:'See you later'},
+    {cat:'greet',icon:'🙏',bg:'rgba(58,157,212,.15)',es:'Por favor',ar:'من فضلك',en:'Please'},
+    {cat:'greet',icon:'💝',bg:'rgba(45,206,137,.15)',es:'Gracias',ar:'شكراً',en:'Thank you'},
+    {cat:'greet',icon:'✨',bg:'rgba(245,166,35,.15)',es:'De nada',ar:'عفواً / على الرحب',en:"You're welcome"},
+    {cat:'greet',icon:'😔',bg:'rgba(224,92,75,.15)',es:'Lo siento',ar:'آسف / أعتذر',en:'I\'m sorry'},
+    {cat:'intro',icon:'🙋',bg:'rgba(245,166,35,.15)',es:'Me llamo...',ar:'اسمي...',en:'My name is...'},
+    {cat:'intro',icon:'🌍',bg:'rgba(58,157,212,.15)',es:'Soy de Arabia Saudita',ar:'أنا من المملكة العربية السعودية',en:"I'm from Saudi Arabia"},
+    {cat:'intro',icon:'🗣️',bg:'rgba(224,92,75,.15)',es:'Hablo árabe e inglés',ar:'أتحدث العربية والإنجليزية',en:'I speak Arabic and English'},
+    {cat:'intro',icon:'📚',bg:'rgba(45,206,137,.15)',es:'Estoy aprendiendo español',ar:'أنا أتعلم الإسبانية',en:"I'm learning Spanish"},
+    {cat:'intro',icon:'🔄',bg:'rgba(142,68,173,.15)',es:'¿Puedes repetir, por favor?',ar:'هل يمكنك التكرار من فضلك؟',en:'Can you repeat please?'},
+    {cat:'intro',icon:'🐌',bg:'rgba(245,166,35,.15)',es:'Más despacio, por favor',ar:'أبطأ من فضلك',en:'Slower please'},
+    {cat:'intro',icon:'🤔',bg:'rgba(58,157,212,.15)',es:'No entiendo',ar:'لا أفهم',en:"I don't understand"},
+    {cat:'daily',icon:'⏰',bg:'rgba(245,166,35,.15)',es:'¿Qué hora es?',ar:'كم الساعة؟',en:'What time is it?'},
+    {cat:'daily',icon:'📅',bg:'rgba(58,157,212,.15)',es:'¿Qué día es hoy?',ar:'ما اليوم؟',en:'What day is today?'},
+    {cat:'daily',icon:'💤',bg:'rgba(45,206,137,.15)',es:'Tengo sueño',ar:'أنا نعسان',en:"I'm sleepy"},
+    {cat:'daily',icon:'🍽️',bg:'rgba(224,92,75,.15)',es:'Tengo hambre',ar:'أنا جائع',en:"I'm hungry"},
+    {cat:'food',icon:'🍽️',bg:'rgba(245,166,35,.15)',es:'Una mesa para dos, por favor',ar:'طاولة لشخصين من فضلك',en:'A table for two please'},
+    {cat:'food',icon:'📋',bg:'rgba(58,157,212,.15)',es:'¿Me trae la carta?',ar:'هل تحضر لي القائمة؟',en:'Can I have the menu?'},
+    {cat:'food',icon:'✅',bg:'rgba(45,206,137,.15)',es:'Quiero esto',ar:'أريد هذا',en:'I want this'},
+    {cat:'food',icon:'💰',bg:'rgba(224,92,75,.15)',es:'La cuenta, por favor',ar:'الحساب من فضلك',en:'The bill please'},
+    {cat:'food',icon:'😋',bg:'rgba(245,166,35,.15)',es:'Está delicioso',ar:'إنه لذيذ جداً',en:"It's delicious"},
+    {cat:'shop',icon:'💰',bg:'rgba(245,166,35,.15)',es:'¿Cuánto cuesta?',ar:'بكم هذا؟',en:'How much is it?'},
+    {cat:'shop',icon:'🛒',bg:'rgba(58,157,212,.15)',es:'Me lo llevo',ar:'سآخذه',en:"I'll take it"},
+    {cat:'shop',icon:'🎨',bg:'rgba(224,92,75,.15)',es:'¿Lo tiene en otro color?',ar:'هل عندك بلون آخر؟',en:'Do you have another color?'},
+    {cat:'transport',icon:'🗺️',bg:'rgba(245,166,35,.15)',es:'¿Dónde está...?',ar:'أين يقع...؟',en:'Where is...?'},
+    {cat:'transport',icon:'✈️',bg:'rgba(58,157,212,.15)',es:'¿Cómo llego al aeropuerto?',ar:'كيف أصل للمطار؟',en:'How do I get to the airport?'},
+    {cat:'transport',icon:'🚕',bg:'rgba(224,92,75,.15)',es:'Lléveme a esta dirección',ar:'خذني لهذا العنوان',en:'Take me to this address'},
+    {cat:'emergency',icon:'🆘',bg:'rgba(224,92,75,.2)',es:'¡Ayuda!',ar:'النجدة!',en:'Help!'},
+    {cat:'emergency',icon:'👮',bg:'rgba(224,92,75,.15)',es:'Llame a la policía',ar:'اتصل بالشرطة',en:'Call the police'},
+    {cat:'emergency',icon:'🏥',bg:'rgba(58,157,212,.15)',es:'Necesito un médico',ar:'أحتاج طبيباً',en:'I need a doctor'},
+    {cat:'emergency',icon:'💊',bg:'rgba(45,206,137,.15)',es:'Me siento mal',ar:'أشعر بتعب',en:'I feel sick'},
+  ],
+
+  numbers:[
+    {n:0,es:'cero',ar:'صفر'},{n:1,es:'uno',ar:'واحد'},{n:2,es:'dos',ar:'اثنان'},{n:3,es:'tres',ar:'ثلاثة'},{n:4,es:'cuatro',ar:'أربعة'},{n:5,es:'cinco',ar:'خمسة'},{n:6,es:'seis',ar:'ستة'},{n:7,es:'siete',ar:'سبعة'},{n:8,es:'ocho',ar:'ثمانية'},{n:9,es:'nueve',ar:'تسعة'},{n:10,es:'diez',ar:'عشرة'},{n:11,es:'once',ar:'أحد عشر'},{n:12,es:'doce',ar:'اثنا عشر'},{n:13,es:'trece',ar:'ثلاثة عشر'},{n:14,es:'catorce',ar:'أربعة عشر'},{n:15,es:'quince',ar:'خمسة عشر'},{n:16,es:'dieciséis',ar:'ستة عشر'},{n:17,es:'diecisiete',ar:'سبعة عشر'},{n:18,es:'dieciocho',ar:'ثمانية عشر'},{n:19,es:'diecinueve',ar:'تسعة عشر'},{n:20,es:'veinte',ar:'عشرون'},{n:21,es:'veintiuno',ar:'واحد وعشرون'},{n:30,es:'treinta',ar:'ثلاثون'},{n:31,es:'treinta y uno',ar:'واحد وثلاثون'},{n:40,es:'cuarenta',ar:'أربعون'},{n:50,es:'cincuenta',ar:'خمسون'},{n:60,es:'sesenta',ar:'ستون'},{n:70,es:'setenta',ar:'سبعون'},{n:80,es:'ochenta',ar:'ثمانون'},{n:90,es:'noventa',ar:'تسعون'},{n:100,es:'cien',ar:'مئة'},{n:200,es:'doscientos',ar:'مئتان'},{n:500,es:'quinientos',ar:'خمسمئة'},{n:1000,es:'mil',ar:'ألف'},
+  ],
+
+  vcCats:[{id:'colors',l:'🎨 الألوان'},{id:'family',l:'👨‍👩‍👧 العائلة'},{id:'body',l:'🫀 الجسم'},{id:'food',l:'🍎 الطعام'},{id:'animals',l:'🐶 الحيوانات'},{id:'home',l:'🏠 المنزل'},{id:'nature',l:'🌿 الطبيعة'},{id:'travel',l:'✈️ السفر'},{id:'time',l:'⏰ الوقت'},{id:'adj',l:'✨ صفات'}],
+
+  vocab:[
+    {cat:'colors',e:'🔴',es:'rojo',ar:'أحمر',gen:'masc.'},{cat:'colors',e:'🔵',es:'azul',ar:'أزرق',gen:''},{cat:'colors',e:'🟡',es:'amarillo',ar:'أصفر',gen:'masc.'},{cat:'colors',e:'🟢',es:'verde',ar:'أخضر',gen:''},{cat:'colors',e:'⚫',es:'negro',ar:'أسود',gen:'masc.'},{cat:'colors',e:'⚪',es:'blanco',ar:'أبيض',gen:'masc.'},{cat:'colors',e:'🟠',es:'naranja',ar:'برتقالي',gen:''},{cat:'colors',e:'🟣',es:'morado',ar:'بنفسجي',gen:'masc.'},{cat:'colors',e:'🩷',es:'rosa',ar:'وردي',gen:''},{cat:'colors',e:'🟤',es:'marrón',ar:'بني',gen:''},{cat:'colors',e:'🩶',es:'gris',ar:'رمادي',gen:''},
+    {cat:'family',e:'👨',es:'padre',ar:'أب',gen:'el'},{cat:'family',e:'👩',es:'madre',ar:'أم',gen:'la'},{cat:'family',e:'👦',es:'hijo',ar:'ابن',gen:'el'},{cat:'family',e:'👧',es:'hija',ar:'ابنة',gen:'la'},{cat:'family',e:'👴',es:'abuelo',ar:'جد',gen:'el'},{cat:'family',e:'👵',es:'abuela',ar:'جدة',gen:'la'},{cat:'family',e:'👱',es:'hermano',ar:'أخ',gen:'el'},{cat:'family',e:'👩‍🦰',es:'hermana',ar:'أخت',gen:'la'},{cat:'family',e:'💑',es:'esposo',ar:'زوج',gen:'el'},{cat:'family',e:'👰',es:'esposa',ar:'زوجة',gen:'la'},{cat:'family',e:'👶',es:'bebé',ar:'طفل رضيع',gen:'el/la'},{cat:'family',e:'🧑',es:'amigo',ar:'صديق',gen:'el'},
+    {cat:'body',e:'👁️',es:'ojo',ar:'عين',gen:'el'},{cat:'body',e:'👃',es:'nariz',ar:'أنف',gen:'la'},{cat:'body',e:'👄',es:'boca',ar:'فم',gen:'la'},{cat:'body',e:'👂',es:'oreja',ar:'أذن',gen:'la'},{cat:'body',e:'✋',es:'mano',ar:'يد',gen:'la'},{cat:'body',e:'🦶',es:'pie',ar:'قدم',gen:'el'},{cat:'body',e:'🫀',es:'corazón',ar:'قلب',gen:'el'},{cat:'body',e:'🧠',es:'cabeza',ar:'رأس',gen:'la'},
+    {cat:'food',e:'🍎',es:'manzana',ar:'تفاحة',gen:'la'},{cat:'food',e:'🍌',es:'plátano',ar:'موزة',gen:'el'},{cat:'food',e:'🍞',es:'pan',ar:'خبز',gen:'el'},{cat:'food',e:'💧',es:'agua',ar:'ماء',gen:'el'},{cat:'food',e:'☕',es:'café',ar:'قهوة',gen:'el'},{cat:'food',e:'🍚',es:'arroz',ar:'أرز',gen:'el'},{cat:'food',e:'🥩',es:'carne',ar:'لحم',gen:'la'},{cat:'food',e:'🐟',es:'pescado',ar:'سمك',gen:'el'},{cat:'food',e:'🧀',es:'queso',ar:'جبن',gen:'el'},{cat:'food',e:'🥚',es:'huevo',ar:'بيضة',gen:'el'},{cat:'food',e:'🍅',es:'tomate',ar:'طماطم',gen:'el'},{cat:'food',e:'🧅',es:'cebolla',ar:'بصل',gen:'la'},
+    {cat:'animals',e:'🐶',es:'perro',ar:'كلب',gen:'el'},{cat:'animals',e:'🐱',es:'gato',ar:'قطة',gen:'el/la'},{cat:'animals',e:'🐴',es:'caballo',ar:'حصان',gen:'el'},{cat:'animals',e:'🐄',es:'vaca',ar:'بقرة',gen:'la'},{cat:'animals',e:'🐑',es:'oveja',ar:'خروف',gen:'la'},{cat:'animals',e:'🐦',es:'pájaro',ar:'طائر',gen:'el'},{cat:'animals',e:'🐠',es:'pez',ar:'سمكة',gen:'el'},{cat:'animals',e:'🦁',es:'león',ar:'أسد',gen:'el'},
+    {cat:'home',e:'🏠',es:'casa',ar:'منزل',gen:'la'},{cat:'home',e:'🛏️',es:'cama',ar:'سرير',gen:'la'},{cat:'home',e:'🪑',es:'silla',ar:'كرسي',gen:'la'},{cat:'home',e:'🚪',es:'puerta',ar:'باب',gen:'la'},{cat:'home',e:'🪟',es:'ventana',ar:'نافذة',gen:'la'},{cat:'home',e:'🛁',es:'baño',ar:'حمام',gen:'el'},{cat:'home',e:'🍳',es:'cocina',ar:'مطبخ',gen:'la'},{cat:'home',e:'📺',es:'televisión',ar:'تلفاز',gen:'la'},
+    {cat:'nature',e:'☀️',es:'sol',ar:'شمس',gen:'el'},{cat:'nature',e:'🌙',es:'luna',ar:'قمر',gen:'la'},{cat:'nature',e:'⭐',es:'estrella',ar:'نجمة',gen:'la'},{cat:'nature',e:'🌊',es:'mar',ar:'بحر',gen:'el'},{cat:'nature',e:'⛰️',es:'montaña',ar:'جبل',gen:'la'},{cat:'nature',e:'🌲',es:'árbol',ar:'شجرة',gen:'el'},{cat:'nature',e:'🌹',es:'flor',ar:'زهرة',gen:'la'},{cat:'nature',e:'🌧️',es:'lluvia',ar:'مطر',gen:'la'},
+    {cat:'travel',e:'✈️',es:'avión',ar:'طائرة',gen:'el'},{cat:'travel',e:'🏨',es:'hotel',ar:'فندق',gen:'el'},{cat:'travel',e:'🗺️',es:'mapa',ar:'خريطة',gen:'el'},{cat:'travel',e:'🛂',es:'pasaporte',ar:'جواز سفر',gen:'el'},{cat:'travel',e:'💰',es:'dinero',ar:'مال',gen:'el'},{cat:'travel',e:'🎟️',es:'billete',ar:'تذكرة',gen:'el'},
+    {cat:'time',e:'📅',es:'lunes',ar:'الاثنين',gen:''},{cat:'time',e:'📅',es:'martes',ar:'الثلاثاء',gen:''},{cat:'time',e:'📅',es:'miércoles',ar:'الأربعاء',gen:''},{cat:'time',e:'📅',es:'jueves',ar:'الخميس',gen:''},{cat:'time',e:'📅',es:'viernes',ar:'الجمعة',gen:''},{cat:'time',e:'📅',es:'sábado',ar:'السبت',gen:''},{cat:'time',e:'📅',es:'domingo',ar:'الأحد',gen:''},{cat:'time',e:'🗓️',es:'enero',ar:'يناير',gen:''},{cat:'time',e:'🗓️',es:'febrero',ar:'فبراير',gen:''},{cat:'time',e:'🗓️',es:'marzo',ar:'مارس',gen:''},{cat:'time',e:'🗓️',es:'abril',ar:'أبريل',gen:''},{cat:'time',e:'🗓️',es:'mayo',ar:'مايو',gen:''},
+    {cat:'adj',e:'😊',es:'feliz',ar:'سعيد',gen:''},{cat:'adj',e:'😢',es:'triste',ar:'حزين',gen:''},{cat:'adj',e:'⬆️',es:'grande',ar:'كبير',gen:''},{cat:'adj',e:'⬇️',es:'pequeño',ar:'صغير',gen:'masc.'},{cat:'adj',e:'🔥',es:'caliente',ar:'حار',gen:''},{cat:'adj',e:'🧊',es:'frío',ar:'بارد',gen:'masc.'},{cat:'adj',e:'💨',es:'rápido',ar:'سريع',gen:'masc.'},{cat:'adj',e:'🐢',es:'lento',ar:'بطيء',gen:'masc.'},{cat:'adj',e:'🌟',es:'bonito',ar:'جميل',gen:'masc.'},{cat:'adj',e:'😖',es:'feo',ar:'قبيح',gen:'masc.'},
+  ],
+
+  prons:[
+    {l:'A a',sound:'[a] مثل العربية تماماً',ex:'agua (ماء) — casa (منزل)',word:'agua',note:null},
+    {l:'E e',sound:'[e] مثل "يد" — ليس "إي"',ex:'mesa (طاولة) — verde (أخضر)',word:'mesa',note:null},
+    {l:'I i',sound:'[i] مثل العربية تماماً',ex:'isla (جزيرة) — libro (كتاب)',word:'libro',note:null},
+    {l:'O o',sound:'[o] مثل العربية تماماً',ex:'oro (ذهب) — color (لون)',word:'oro',note:null},
+    {l:'U u',sound:'[u] مثل العربية تماماً',ex:'uva (عنب) — uno (واحد)',word:'uno',note:null},
+    {l:'J j',sound:'[x] مثل الخاء العربية "خ" 🔑',ex:'jamón — joven (شاب)',word:'jamón',note:'سهل للعرب! نفس الخاء تماماً'},
+    {l:'H h',sound:'صامتة — لا تُنطق أبداً! ⚠️',ex:'hola (مرحباً) تُنطق "أولا"',word:'hola',note:'أكثر ما يُربك المبتدئين — H صامتة دائماً'},
+    {l:'Ñ ñ',sound:'[ɲ] مثل "نيا" المشددة',ex:'mañana (غداً) — niño (طفل)',word:'mañana',note:'حرف خاص بالإسبانية فقط'},
+    {l:'LL ll',sound:'[ʝ] مثل "ي" في معظم اللهجات',ex:'llave (مفتاح) — llama (يسمى)',word:'llave',note:'في إسبانيا: "يا" — في أمريكا: "ي"'},
+    {l:'RR rr',sound:'[r] راء مرددة قوية',ex:'arroz (أرز) — perro (كلب)',word:'arroz',note:'مثل الراء العربية لكن أكثر ترديداً'},
+    {l:'R r',sound:'[r] راء خفيفة في المنتصف',ex:'pero (لكن) — cara (وجه)',word:'pero',note:'في البداية = مرددة. في المنتصف = خفيفة'},
+    {l:'V v',sound:'[b] مثل الباء "b" تماماً!',ex:'vino — verde (أخضر)',word:'verde',note:'في الإسبانية V و B صوت واحد = الباء'},
+    {l:'G g',sound:'[g] أو [x] حسب الموقع',ex:'gato (قطة) — gente (ناس)',word:'gato',note:'قبل e/i تصبح خاء — وإلا تبقى غين'},
+    {l:'C c',sound:'[k] أو [θ/s]',ex:'casa (منزل) — ciudad (مدينة)',word:'ciudad',note:'قبل e/i: إسبانيا="ث"، أمريكا="س"'},
+    {l:'QU qu',sound:'[k] دائماً — الـ U لا تُنطق',ex:'quiero (أريد) — que (أن)',word:'quiero',note:'هكذا تكتب الكاف قبل e/i'},
+    {l:'Y y',sound:'[ʝ] مثل "ي"',ex:'yo (أنا) — ya (الآن)',word:'yo',note:'في معظم اللهجات مثل الياء العربية'},
+    {l:'Z z',sound:'[θ] في إسبانيا / [s] في أمريكا',ex:'zona — azul (أزرق)',word:'azul',note:'إسبانيا="ث"، أمريكا اللاتينية="س"'},
+  ],
+
+  conj:{
+    ser:[['yo','soy','أنا أكون/أنا'],['tú','eres','أنت'],['él/ella','es','هو/هي'],['nosotros','somos','نحن'],['vosotros','sois','أنتم (إسبانيا)'],['ellos','son','هم']],
+    estar:[['yo','estoy','أنا (موقع/حالة)'],['tú','estás','أنت'],['él/ella','está','هو/هي'],['nosotros','estamos','نحن'],['vosotros','estáis','أنتم (إسبانيا)'],['ellos','están','هم']],
+    tener:[['yo','tengo','عندي/أملك'],['tú','tienes','عندك'],['él/ella','tiene','عنده/عندها'],['nosotros','tenemos','عندنا'],['vosotros','tenéis','عندكم'],['ellos','tienen','عندهم']],
+    ir:[['yo','voy','أذهب'],['tú','vas','تذهب'],['él/ella','va','يذهب/تذهب'],['nosotros','vamos','نذهب'],['vosotros','vais','تذهبون'],['ellos','van','يذهبون']],
+    querer:[['yo','quiero','أريد/أحب'],['tú','quieres','تريد'],['él/ella','quiere','يريد/تريد'],['nosotros','queremos','نريد'],['vosotros','queréis','تريدون'],['ellos','quieren','يريدون']],
+  },
+
+  questions:[
+    {es:'¿Qué?',ar:'ماذا؟',ex:'¿Qué es esto?'},{es:'¿Quién?',ar:'من؟',ex:'¿Quién eres?'},
+    {es:'¿Dónde?',ar:'أين؟',ex:'¿Dónde está el baño?'},{es:'¿Cuándo?',ar:'متى؟',ex:'¿Cuándo llegaste?'},
+    {es:'¿Cómo?',ar:'كيف؟',ex:'¿Cómo te llamas?'},{es:'¿Por qué?',ar:'لماذا؟',ex:'¿Por qué estudias?'},
+    {es:'¿Cuánto?',ar:'كم؟',ex:'¿Cuánto cuesta?'},{es:'¿Cuál?',ar:'أيّ؟',ex:'¿Cuál prefieres?'},
+  ],
+
+  dialogues:[
+    {icon:'☕',title:'في المقهى',ctx:'موقف: تطلب قهوة',msgs:[
+      {side:'A',es:'Buenos días, ¿qué desea?',ar:'صباح الخير، ماذا تريد؟',en:'Good morning, what would you like?'},
+      {side:'B',es:'Un café con leche, por favor.',ar:'قهوة بالحليب من فضلك.',en:'A coffee with milk, please.'},
+      {side:'A',es:'¿Algo más?',ar:'شيء آخر؟',en:'Anything else?'},
+      {side:'B',es:'Un vaso de agua también, gracias.',ar:'كوب ماء أيضاً، شكراً.',en:'A glass of water too, thanks.'},
+      {side:'A',es:'Son 4 euros.',ar:'4 يورو.',en:'That\'s 4 euros.'},
+    ]},
+    {icon:'🏨',title:'في الفندق',ctx:'موقف: حجز غرفة',msgs:[
+      {side:'B',es:'Buenas tardes. Tengo una reserva.',ar:'مساء الخير. عندي حجز.',en:'Good afternoon. I have a reservation.'},
+      {side:'A',es:'¿A nombre de quién?',ar:'باسم من؟',en:'Under what name?'},
+      {side:'B',es:'Ahmed Al-Rashid. Tres noches.',ar:'أحمد الراشد. ثلاث ليالٍ.',en:'Ahmed Al-Rashid. Three nights.'},
+      {side:'A',es:'Perfecto, habitación 205. ¿Necesita ayuda?',ar:'ممتاز، غرفة 205. هل تحتاج مساعدة؟',en:'Perfect, room 205. Do you need help?'},
+      {side:'B',es:'No gracias. ¿Cuál es el wifi?',ar:'لا شكراً. ما هو الواي فاي؟',en:'No thanks. What\'s the wifi?'},
+    ]},
+    {icon:'🗺️',title:'طلب الاتجاهات',ctx:'موقف: تسأل عن الطريق',msgs:[
+      {side:'B',es:'Perdona, ¿dónde está el metro?',ar:'معذرة، أين المترو؟',en:'Excuse me, where is the metro?'},
+      {side:'A',es:'Siga todo recto y gire a la izquierda.',ar:'امشِ مباشرة ثم اتجه يساراً.',en:'Go straight and turn left.'},
+      {side:'B',es:'¿Está lejos?',ar:'هل هو بعيد؟',en:'Is it far?'},
+      {side:'A',es:'No, cinco minutos caminando.',ar:'لا، خمس دقائق مشياً.',en:'No, five minutes walking.'},
+      {side:'B',es:'¡Muchas gracias!',ar:'شكراً جزيلاً!',en:'Thank you very much!'},
+      {side:'A',es:'¡De nada! ¡Buen viaje!',ar:'عفواً! رحلة طيبة!',en:'You\'re welcome! Have a good trip!'},
+    ]},
+    {icon:'🛍️',title:'في المتجر',ctx:'موقف: تشتري ملابس',msgs:[
+      {side:'A',es:'¿Le puedo ayudar?',ar:'هل يمكنني مساعدتك؟',en:'Can I help you?'},
+      {side:'B',es:'Sí, busco una camisa azul.',ar:'نعم، أبحث عن قميص أزرق.',en:'Yes, I\'m looking for a blue shirt.'},
+      {side:'A',es:'¿Qué talla tiene?',ar:'ما هو مقاسك؟',en:'What size do you wear?'},
+      {side:'B',es:'Talla mediana. ¿Cuánto cuesta?',ar:'مقاس وسط. بكم هو؟',en:'Medium. How much is it?'},
+      {side:'A',es:'Veintinueve euros.',ar:'تسعة وعشرون يورو.',en:'29 euros.'},
+      {side:'B',es:'Me lo llevo.',ar:'سآخذه.',en:"I'll take it."},
+    ]},
+  ],
+
+  aiPrompts:[
+    {icon:'🗣️',lvl:'a1',title:'محادثة للمبتدئين',desc:'تمرين محادثة A1 — يتكيف مع أخطائك ويصحح لك بالعربية',prompt:`You are a friendly Spanish tutor. I am an Arabic and English speaker learning Spanish from zero (A1 level).
+
+Have a simple conversation with me in Spanish about daily topics (greetings, weather, family).
+- Use simple A1 vocabulary only
+- After each of my responses, gently correct any mistakes in Arabic
+- Translate anything I don't understand to Arabic
+- Encourage me!
+
+Start by greeting me and asking my name in Spanish.`},
+    {icon:'✏️',lvl:'a1',title:'تصحيح الأخطاء',desc:'أرسل جملك الإسبانية وهو يصححها ويشرح بالعربية',prompt:`You are a Spanish teacher. I will write Spanish sentences and you will:
+1. Correct any grammar, spelling, or vocabulary mistakes
+2. Explain each correction in Arabic
+3. Give me the corrected sentence
+4. Rate my Spanish and tell me what I'm doing well
+
+My sentences: [اكتب جملك هنا]`},
+    {icon:'📝',lvl:'a1',title:'بطاقات حفظ مخصصة',desc:'يولّد بطاقات حفظ بالعربية والإسبانية',prompt:`Generate 20 Spanish vocabulary flashcards for an A1 beginner who speaks Arabic.
+
+Format each card as:
+🇪🇸 [Spanish word] | 🇸🇦 [Arabic translation] | 📖 [Example sentence] | 🔤 [Pronunciation tip for Arabic speakers]
+
+Focus on: daily life, greetings, food, numbers. Group by category.`},
+    {icon:'📖',lvl:'a2',title:'قراءة مع فهم',desc:'قصة قصيرة A2 مع أسئلة فهم بالعربية',prompt:`Write a short story in Spanish (A2 level, 150 words) about an Arab tourist visiting Madrid.
+
+After the story:
+1. Translate it to Arabic
+2. Create 5 comprehension questions in Arabic
+3. List 10 key vocabulary words with Arabic translations
+4. Highlight irregular verbs used`},
+    {icon:'🎭',lvl:'a2',title:'لعب أدوار — Roleplay',desc:'تمرين حوار واقعي في مواقف حياتية',prompt:`Let's do a Spanish roleplay! You play a native Spanish speaker, I am an Arab tourist in Madrid.
+
+Scenario: I'm at a restaurant.
+- You are the waiter
+- Use natural conversational Spanish (A2 level)
+- If I make mistakes, respond naturally first, then add a correction note in Arabic
+- Include typical Spanish expressions
+
+Start now!`},
+    {icon:'🧠',lvl:'b1',title:'شرح SER vs ESTAR',desc:'الدرس الأصعب — مشروح بالعربية مع أمثلة وتمارين',prompt:`Explain the difference between SER and ESTAR in Spanish.
+- Explain in Arabic (I'm an Arabic speaker)
+- Use the simplest possible language
+- Give 10 example sentences for each (with Arabic translation)
+- Create a memory trick to remember when to use each
+- Give me 5 practice sentences, then correct me`},
+    {icon:'🗓️',lvl:'a1',title:'خطة دراسية شخصية',desc:'يصمم لك خطة تعلم حسب وقتك وهدفك',prompt:`Design a personalized Spanish learning plan:
+- I'm an Arabic and English speaker starting from zero
+- I can dedicate 30 minutes per day
+- Goal: basic conversation in 3 months
+- I learn best by listening + reading
+
+Create a week-by-week plan for 12 weeks including:
+- What to study each week
+- Free online resources
+- Daily practice exercises
+- How to use AI (Claude/ChatGPT) for each week
+
+Answer in Arabic.`},
+    {icon:'🎵',lvl:'a2',title:'تعلّم بالأغاني',desc:'تعلم من أغاني إسبانية مشهورة',prompt:`I want to learn Spanish through music. I'm at A2 level.
+
+Recommend 5 Spanish songs that are:
+1. Easy to understand (slow, clear)
+2. Use common A2 vocabulary
+3. Educational
+
+For each song:
+- Song name and artist
+- Why it's good for learning
+- 5 vocabulary words (with Arabic translation)
+- One key grammar point
+
+Teach me the chorus of your top pick, line by line with Arabic translation.`},
+    {icon:'🔄',lvl:'a1',title:'ترجمة ذكية',desc:'يترجم من العربية للإسبانية مع شرح الفروق',prompt:`I will give you Arabic sentences, translate them to Spanish and also:
+1. Explain differences between Arabic and Spanish structure
+2. Point out similar words (cognates)
+3. Give alternative ways to say the same thing
+4. Rate difficulty (A1/A2/B1)
+
+Translate:
+- أريد كوب ماء من فضلك
+- كيف تصل إلى المطار؟
+- أحب القهوة الإسبانية
+- هل يمكنك مساعدتي؟
+- عمري 25 سنة وأعمل مهندساً`},
+    {icon:'🏆',lvl:'a2',title:'اختبار مستوى كامل',desc:'يختبر مستواك ويعطيك تقريراً شاملاً',prompt:`Give me a comprehensive Spanish level test (A1 vs A2).
+
+Include:
+1. Vocabulary (10 questions)
+2. Grammar (10 questions)
+3. Fill in the blanks (5 questions)
+4. Translate to Spanish from Arabic (5 sentences)
+5. Write a paragraph about yourself in Spanish
+
+After completion:
+- Grade each section
+- Tell me my level
+- List strengths and weaknesses
+- Recommend what to focus on next
+
+Start the test one section at a time.`},
+  ],
+
+  qs:[
+    {q:'كيف تقول "مرحباً" بالإسبانية؟',hint:'',opts:['Hola','Adios','Gracias','Buenos'],correct:0,exp:'Hola = مرحباً'},
+    {q:'ما معنى "gracias"؟',hint:'',opts:['عفواً','مرحباً','شكراً','إلى اللقاء'],correct:2,exp:'Gracias = شكراً'},
+    {q:'كيف تقول "اسمي..." بالإسبانية؟',hint:'',opts:['Yo tengo...','Me llamo...','Soy de...','Tengo...'],correct:1,exp:'Me llamo = اسمي...'},
+    {q:'ما تصريف "ser" مع "yo"؟',hint:'فعل يكون مع أنا',opts:['eres','es','soy','somos'],correct:2,exp:'yo → soy'},
+    {q:'ما معنى "¿Dónde está el baño?"',hint:'',opts:['كم الساعة؟','أين الحمام؟','ماذا تريد؟','كيف حالك؟'],correct:1,exp:'¿Dónde? = أين؟ — baño = حمام'},
+    {q:'الرقم 15 بالإسبانية؟',hint:'',opts:['catorce','quince','dieciséis','trece'],correct:1,exp:'15 = quince'},
+    {q:'ما الفرق بين SER و ESTAR؟',hint:'',opts:['لا فرق','SER للأشياء فقط','SER للثابت، ESTAR للمؤقت','ESTAR أرسمي'],correct:2,exp:'SER = دائم، ESTAR = مؤقت'},
+    {q:'كيف تقول "أحمر" بالإسبانية؟',hint:'',opts:['azul','verde','rojo','amarillo'],correct:2,exp:'rojo = أحمر'},
+    {q:'حرف H في الإسبانية...؟',hint:'فكر في كلمة hola',opts:['تنطق هـ','تنطق خ','صامتة لا تُنطق','تنطق ح'],correct:2,exp:'H صامتة دائماً — hola تُنطق "أولا"'},
+    {q:'كيف تقول "أريد ماءً من فضلك"؟',hint:'quiero=أريد، agua=ماء',opts:['Quiero agua, por favor','Tengo agua, gracias','¿Dónde está el agua?','Me llamo agua'],correct:0,exp:'Quiero agua, por favor'},
+    {q:'جنس كلمة "casa" (منزل)؟',hint:'',opts:['مذكر — el casa','مؤنث — la casa','كلاهما','لا يوجد جنس'],correct:1,exp:'casa = مؤنث → la casa'},
+    {q:'كيف تقول "أنا من السعودية"؟',hint:'جنسية = صفة ثابتة',opts:['Estoy de Arabia Saudita','Soy de Arabia Saudita','Tengo Arabia Saudita','Voy Arabia Saudita'],correct:1,exp:'Soy de = أنا من — جنسية تستخدم SER'},
+    {q:'كيف تقول "عندي أخ"؟',hint:'tener = يملك/عنده',opts:['Soy un hermano','Quiero un hermano','Tengo un hermano','Estoy un hermano'],correct:2,exp:'Tengo = عندي (من tener)'},
+    {q:'ما معنى "¿Cómo te llamas?"',hint:'',opts:['كيف حالك؟','أين تسكن؟','ما اسمك؟','من أين أنت؟'],correct:2,exp:'¿Cómo te llamas? = ما اسمك؟'},
+    {q:'كيف تقول "إلى اللقاء"؟',hint:'',opts:['Buenos días','Hasta luego','Por favor','De nada'],correct:1,exp:'Hasta luego = إلى اللقاء'},
+  ],
+
+  roadmap:[
+    {icon:'🌱',active:true,lvl:'a1',title:'المرحلة 1 — الأسس (A1)',desc:'النطق، الأرقام، الألوان، التحيات، تصريف ser/estar/tener/ir، الجنس، المقالات. هدفك: تعريف نفسك وفهم المحادثة البسيطة.',time:'4-6 أسابيع — 30 دقيقة يومياً'},
+    {icon:'🗣️',active:false,lvl:'a1',title:'المرحلة 2 — المحادثة الأولى',desc:'عبارات في المطعم، الفندق، الاتجاهات، التسوق. استخدم AI لتدريب المحادثة يومياً. ابدأ Duolingo.',time:'4-6 أسابيع'},
+    {icon:'📚',active:false,lvl:'a2',title:'المرحلة 3 — بناء المفردات',desc:'200+ كلمة، الماضي البسيط (pretérito). اقرأ مقالات A2 وشاهد أفلاماً بترجمة إسبانية.',time:'6-8 أسابيع'},
+    {icon:'🎯',active:false,lvl:'a2',title:'المرحلة 4 — التعبير عن الرأي',desc:'تعبّر عن رأيك ومشاعرك وتجاربك. استخدم gustar/querer/pensar. ابدأ Netflix بإسبانية.',time:'6-8 أسابيع'},
+    {icon:'🚀',active:false,lvl:'b1',title:'المرحلة 5 — الطلاقة الأولى',desc:'الأزمنة المعقدة والـ subjuntivo. تحدث مع ناطق أصلي عبر Italki أو HelloTalk.',time:'3-4 أشهر'},
+    {icon:'🏆',active:false,lvl:'b1',title:'المرحلة 6 — B1 كامل',desc:'اختبار DELE B1، شاهد البرامج بلا ترجمة، اقرأ كتباً مبسطة. أنت الآن تتكلم إسبانياً!',time:'2-3 أشهر'},
+  ],
+
+  tips:[
+    {icon:'🎧',title:'استمع كل يوم',body:'10 دقائق استماع يومياً تساوي ساعة دراسة أسبوعية. SpanishPod101 أو أغاني بالإسبانية'},
+    {icon:'🗣️',title:'تكلم من اليوم الأول',body:'لا تنتظر حتى تكون جاهزاً — تكلم مع AI الآن! الأخطاء جزء من التعلم'},
+    {icon:'📱',title:'30 دقيقة يومياً',body:'30 دقيقة يومياً أفضل من 4 ساعات في اليوم الواحد. الاستمرارية هي السر'},
+    {icon:'🔄',title:'التكرار المتباعد',body:'راجع الكلمات الجديدة بعد يوم، ثم أسبوع، ثم شهر. استخدم تطبيق Anki'},
+    {icon:'🎬',title:'Netflix بالإسبانية',body:'ابدأ بمسلسل تعرفه بالترجمة الإسبانية. "La Casa de Papel" مثالية'},
+    {icon:'✍️',title:'اكتب يومياً',body:'حتى ثلاث جمل يومياً في دفتر أو للـ AI. الكتابة تُثبّت ما تعلمته'},
+    {icon:'🎯',title:'ركز على الشائع',body:'1000 كلمة شائعة = 90% من المحادثة. لا تحفظ كلمات نادرة في البداية'},
+    {icon:'🌍',title:'تواصل مع ناطقين',body:'HelloTalk و Tandem تتيح لك التحدث مع ناطقين أصليين مجاناً'},
+  ]
+}}
+
+// GSAP Hero
+window.addEventListener('DOMContentLoaded',()=>{
+  gsap.set(['#hflag','#heyebrow','#htitle','#hsub','#hbadges','#hscroll'],{opacity:0,y:30});
+  gsap.set('#hflag',{scale:.3,rotation:-15,y:0});
+
+  const tl=gsap.timeline({delay:.2});
+  tl.to('#hflag',{opacity:1,scale:1,rotation:0,duration:1.2,ease:'back.out(1.4)',y:0})
+    .to('#heyebrow',{opacity:1,y:0,duration:.7,ease:'power3.out'},'-.3')
+    .to('#htitle',{opacity:1,y:0,duration:.8,ease:'power3.out'},'-.2')
+    .to('#hsub',{opacity:1,y:0,duration:.7,ease:'power2.out'},'-.2')
+    .to('#hbadges',{opacity:1,y:0,duration:.6,ease:'power2.out'},'-.2')
+    .to('#hscroll',{opacity:1,y:0,duration:.5},'-.1');
+
+  gsap.to('#hflag',{y:-18,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1,delay:1.4});
+
+  // Stats
+  ScrollTrigger.create({trigger:'#stats',start:'top 85%',once:true,onEnter(){
+    document.querySelectorAll('.sn[data-to]').forEach(el=>{
+      const end=+el.dataset.to;
+      gsap.to({v:0},{v:end,duration:end>100?2:1.5,ease:'power2.out',
+        onUpdate(){el.textContent=Math.round(this.targets()[0].v)+(end>=100?'+':'');}
+      });
+    });
+  }});
+});
+</script>
+</body>
+</html>
